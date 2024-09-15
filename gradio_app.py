@@ -1,8 +1,8 @@
 import gradio as gr
 from theme_classifier import ThemeClassifier
-# from character_network import NamedEntityRecognizer, CharacterNetworkGenerator
-# from text_classification import JutsuClassifier
-# from character_chatbot import CharacterChatBot
+from character_network import NameEntityRecognizer, CharacterNetworkGenerator
+from text_classification import JutsuClassifier
+from character_chatbot import CharacterChatBot
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -32,34 +32,34 @@ def get_themes(theme_list_str,subtitles_path,save_path):
 
     return output_chart
 
-# def get_character_network(subtitles_path,ner_path):
-#     ner = NamedEntityRecognizer()
-#     ner_df = ner.get_ners(subtitles_path,ner_path)
+def get_character_network(subtitles_path,ner_path):
+    ner = NameEntityRecognizer()
+    ner_df = ner.get_ners(subtitles_path,ner_path)
 
-#     character_network_generator = CharacterNetworkGenerator()
-#     relationship_df = character_network_generator.generate_character_network(ner_df)
-#     html = character_network_generator.draw_network_graph(relationship_df)
+    character_network_generator = CharacterNetworkGenerator()
+    relationship_df = character_network_generator.generate_character_network(ner_df)
+    html = character_network_generator.draw_network(relationship_df)
 
-#     return html
+    return html
 
-# def classify_text(text_classifcation_model,text_classifcation_data_path,text_to_classify):
-#     jutsu_classifier = JutsuClassifier(model_path = text_classifcation_model,
-#                                        data_path = text_classifcation_data_path,
-#                                        huggingface_token = os.getenv('huggingface_token'))
+def classify_text(text_classifcation_model,text_classifcation_data_path,text_to_classify):
+    jutsu_classifier = JutsuClassifier(model_path = text_classifcation_model,
+                                       data_path = text_classifcation_data_path,
+                                       huggingface_token = os.getenv('huggingface_token'))
     
-#     output = jutsu_classifier.classify_jutsu(text_to_classify)
-#     output = output[0]
+    output = jutsu_classifier.classify_jutsu(text_to_classify)
+    output = output[0]
     
-#     return output
+    return output
 
-# def chat_with_character_chatbot(message, history):
-#     character_chatbot = CharacterChatBot("AbdullahTarek/Naruto_Llama-3-8B",
-#                                          huggingface_token = os.getenv('huggingface_token')
-#                                          )
+def chat_with_character_chatbot(message, history):
+    character_chatbot = CharacterChatBot("AbdullahTarek/Naruto_Llama-3-8B",
+                                         huggingface_token = os.getenv('huggingface_token')
+                                         )
 
-#     output = character_chatbot.chat(message, history)
-#     output = output['content'].strip()
-#     return output
+    output = character_chatbot.chat(message, history)
+    output = output['content'].strip()
+    return output
 
 
 def main():
