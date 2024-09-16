@@ -89,7 +89,7 @@ def main():
                         subtitles_path = gr.Textbox(label="Subtutles or Script Path")
                         ner_path = gr.Textbox(label="NERs save path")
                         get_network_graph_button = gr.Button("Get Character Network")
-                        # get_network_graph_button.click(get_character_network, inputs=[subtitles_path,ner_path], outputs=[network_html])
+                        get_network_graph_button.click(get_character_network, inputs=[subtitles_path,ner_path], outputs=[network_html])
 
         # Text Classification with LLMs
         with gr.Row():
@@ -103,13 +103,13 @@ def main():
                         text_classifcation_data_path = gr.Textbox(label='Data Path')
                         text_to_classify = gr.Textbox(label='Text input')
                         classify_text_button = gr.Button("Clasify Text (Jutsu)")
-                        # classify_text_button.click(classify_text, inputs=[text_classifcation_model,text_classifcation_data_path,text_to_classify], outputs=[text_classification_output])
+                        classify_text_button.click(classify_text, inputs=[text_classifcation_model,text_classifcation_data_path,text_to_classify], outputs=[text_classification_output])
 
         # Character Chatbot Section
         with gr.Row():
             with gr.Column():
                 gr.HTML("<h1>Character Chatbot</h1>")
-                # gr.ChatInterface(chat_with_character_chatbot)
+                gr.ChatInterface(chat_with_character_chatbot)
 
     iface.launch(share=True)
             
